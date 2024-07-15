@@ -1,5 +1,5 @@
 # BackofficeApp
-Melakukan npm i untuk install node_modules yg diperlukan
+Melakukan npm i untuk melalukan instalasi node_modules yang diperlukan
 
 # Run App
 Gunakan npm start pada console
