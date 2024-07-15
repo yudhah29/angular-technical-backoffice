@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eafbff;
+  height: 95%;
+}
+
+.error {
+  color: red;
+  font-size: 0.75rem;
+}

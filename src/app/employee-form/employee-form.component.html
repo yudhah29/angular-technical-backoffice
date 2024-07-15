@@ -1,0 +1,119 @@
+<p-menubar styleClass="flex justify-content-end" [model]="menuItems"></p-menubar>
+<div class="container">
+  <div class="surface-card p-4 shadow-2 border-round lg:w-9">
+    <p-messages></p-messages>
+
+    <div class="text-center mb-5">
+      <div class="text-900 text-3xl font-medium mb-3">New Employee Form</div>
+    </div>
+
+    <form (ngSubmit)="saveEmployee(employeeForm)" #employeeForm="ngForm" novalidate>
+      <div class="p-grid p-fluid">
+
+        <div class="flex justify-content-between">
+
+          <div class="col-6">
+            <div class="p-col-12 p-md-6 mb-2">
+              <div class="p-field">
+                <label for="username">Username</label>
+                <input id="username" type="text" pInputText name="username" [(ngModel)]="employee.username" #username="ngModel" required>
+                <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error">
+                  <small *ngIf="username.errors?.['required']" class="p-error">This field is required</small>
+                </div>
+              </div>
+            </div>
+    
+            <div class="p-col-12 p-md-6 mb-2">
+              <div class="p-field">
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text" pInputText name="firstName" [(ngModel)]="employee.firstName" #firstName="ngModel" required>
+                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="error">
+                  <small *ngIf="firstName.errors?.['required']" class="p-error">This field is required</small>
+                </div>
+              </div>
+            </div>
+    
+            <div class="p-col-12 p-md-6 mb-2">
+              <div class="p-field">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" type="text" pInputText name="lastName" [(ngModel)]="employee.lastName" #lastName="ngModel" required>
+                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="error">
+                  <small *ngIf="lastName.errors?.['required']" class="p-error">This field is required</small>
+                </div>
+              </div>
+            </div>
+    
+            <div class="p-col-12 p-md-6 mb-2">
+              <div class="p-field">
+                <label for="email">Email</label>
+                <input id="email" type="email" pInputText name="email" [(ngModel)]="employee.email" #email="ngModel" required>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+                  <small *ngIf="email.errors?.['required']" class="p-error">This field is required</small>
+                  <small *ngIf="email.errors?.['email']" class="p-error">Invalid email address</small>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+  
+          <div class="col-6">
+            <div class="p-col-12 p-md-6 mb-2">
+              <div class="p-field">
+                <label for="birthDate">Birth Date</label>
+                <p-calendar id="birthDate" name="birthDate" [(ngModel)]="employee.birthDate" #birthDate="ngModel" dateFormat="yy-mm-dd" [showIcon]="true" required></p-calendar>
+                <div *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="error">
+                  <small *ngIf="birthDate.errors?.['required']" class="p-error">This field is required</small>
+                </div>
+              </div>
+            </div>
+    
+            <div class="p-col-12 p-md-6 mb-2">
+              <div class="p-field">
+                <label for="basicSalary">Basic Salary</label>
+                <input id="basicSalary" type="number" pInputText name="basicSalary" [(ngModel)]="employee.basicSalary" #basicSalary="ngModel" required>
+                <div *ngIf="basicSalary.invalid && (basicSalary.dirty || basicSalary.touched)" class="error">
+                  <small *ngIf="basicSalary.errors?.['required']" class="p-error">This field is required</small>
+                </div>
+              </div>
+            </div>
+    
+            <div class="p-col-12 p-md-6 mb-2">
+              <div class="p-field">
+                <label for="group">Group</label>
+                <p-dropdown id="group" name="group" [options]="groupOptions" [(ngModel)]="employee.group" #group="ngModel" [filter]="true" filterPlaceholder="Search groups" [showClear]="true"></p-dropdown>
+                <div *ngIf="group.touched" class="error">
+                  <small *ngIf="group.errors?.['required']" class="p-error">This field is required</small>
+                </div>
+              </div>
+            </div>
+    
+            <div class="p-col-12">
+              <div class="p-field">
+                <label for="description">Description</label>
+                <textarea id="description" pInputTextarea name="description" [(ngModel)]="employee.description" #description="ngModel" required></textarea>
+                <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+                  <small *ngIf="description.errors?.['required']" class="p-error">This field is required</small>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="p-col-12">
+          <div class="p-grid">
+            <div class="flex justify-content-end">
+              <div class="p-col mr-2">
+                <button pButton type="button" label="Cancel" class="p-button-secondary w-7rem" routerLink="/employee-list"></button>
+              </div>
+              <div class="p-col">
+                <button pButton type="submit" label="Save" class="p-button-success w-7rem" [disabled]="employeeForm.invalid"></button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

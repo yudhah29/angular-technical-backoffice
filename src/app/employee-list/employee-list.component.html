@@ -1,0 +1,85 @@
+<p-menubar styleClass="flex justify-content-end" [model]="menuItems"></p-menubar>
+<div class="container">
+  <div class="surface-card p-4 shadow-2 border-round lg:w-10 my-5">
+
+    <p-messages></p-messages>
+
+    <div class="grid mb-3 align-items-center">
+      <div class="col-3">
+        <div class="p-inputgroup mr-2">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-search"></i>
+          </span>
+          <input type="text" pInputText placeholder="Search by username" [(ngModel)]="searchName"
+            (ngModelChange)="search()">
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-user"></i>
+          </span>
+          <input type="text" pInputText placeholder="Search by email" [(ngModel)]="searchEmail"
+            (ngModelChange)="search()">
+        </div>
+      </div>
+
+      <div class="col flex justify-content-end">
+        <button pButton type="button" icon="pi pi-plus" label="Add New Employee" class="p-button-success p-button-sm"
+          (click)="showAddEmployee()"></button>
+      </div>
+    </div>
+
+    <p-table [scrollable]="true" scrollHeight="430px" [value]="filteredEmployees" [paginator]="true" [rows]="rows"
+      [rowsPerPageOptions]="rowsPerPageOptions" [sortOrder]="sortOrder" [sortField]="sortField"
+      (sortChange)="onSort($event)" [autoLayout]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="username">Username
+            <p-sortIcon field="username" />
+          </th>
+          <th pSortableColumn="email">Email
+            <p-sortIcon field="email" />
+          </th>
+          <th pSortableColumn="basicSalary">Basic Salary
+            <p-sortIcon field="basicSalary" />
+          </th>
+          <th pSortableColumn="status">Status
+            <p-sortIcon field="status" />
+          </th>
+          <th pSortableColumn="group">Group
+            <p-sortIcon field="group" />
+          </th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-employee>
+        <tr>
+          <td>{{ employee.username }}</td>
+          <td>{{ employee.email }}</td>
+          <td>{{ employee.basicSalary | currency }}</td>
+          <td>
+            <span class="status-chip"
+              [ngClass]="{ 'active': employee.status === 'Active', 'inactive': employee.status === 'Inactive' }">
+              {{ employee.status }}
+            </span>
+          </td>
+          <td>{{ employee.group }}</td>
+          <td>
+            <div class="flex justify-content-between">
+              <button pButton type="button" icon="pi pi-eye" label="Detail" class="p-button-info p-button-sm mr-1"
+                (click)="showEmployeeDetails(employee.username)"></button>
+              <button pButton type="button" icon="pi pi-pencil" label="Edit" class="p-button-warning p-button-sm mr-1"
+                (click)="showEditNotification()"></button>
+              <button pButton type="button" icon="pi pi-trash" label="Delete" class="p-button-danger p-button-sm"
+                (click)="showDeleteNotification()"></button>
+            </div>
+
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+</div>
